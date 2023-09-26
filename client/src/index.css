@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.dark {
+    background-color: #212020;
+    color: white;
+}
+
+.light_dark {
+  background-color: #373333;
+}
