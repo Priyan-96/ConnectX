@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import { MobileViewProvider } from './contexts/MobileViewContext';
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -12,13 +13,15 @@ const queryclient = new QueryClient();
 
 root.render(
   <React.StrictMode>
-    <DarkModeProvider>
-      <AuthContextProvider>
-        <QueryClientProvider client={queryclient}>
-          <App />
-        </QueryClientProvider>
-      </AuthContextProvider>
-    </DarkModeProvider>
+    <MobileViewProvider>
+      <DarkModeProvider>
+        <AuthContextProvider>
+          <QueryClientProvider client={queryclient}>
+            <App />
+          </QueryClientProvider>
+        </AuthContextProvider>
+      </DarkModeProvider>
+    </MobileViewProvider>
   </React.StrictMode>
 );
 

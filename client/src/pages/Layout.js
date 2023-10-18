@@ -19,11 +19,11 @@ export default function Layout() {
     // <QueryClientProvider client={queryClient}>
       <div className={`w-full h-full flex`}>
         <Navbar />
-        <div className={`w-full h-full overflow-y-scroll overflow-x-hidden scrollbar`}>
-          <div className={`w-[18%] fixed overflow-y-scroll left-0 top-[60px] bottom-0 scrollbar bg-white ${isDarkMode ? 'dark' : ''}`}>
+        <div className={`w-full h-full overflow-y-scroll overflow-x-hidden scrollbar ${isDarkMode ? 'light_dark' : ' bg-gray-lightest'}`}>
+          {/* <div className={`w-[18%] fixed overflow-y-scroll left-0 top-[60px] bottom-0 scrollbar bg-white ${isDarkMode ? 'dark' : ''}`}>
             <Leftbar />
-          </div>
-          <div className={`w-[85%] h-full top-[60px] overflow-y-scroll flex left-[18%] p-5 relative ${isDarkMode ? 'light_dark' : ' bg-gray-lightest'}`}>
+          </div> */}
+          <div className={`w-[85%] h-full top-[60px] overflow-y-scroll flex left-[5%] scrollbar p-5 relative ${isDarkMode ? 'light_dark' : ' bg-gray-lightest'}`}>
             <Outlet />
             <Rightbar />
           </div>
