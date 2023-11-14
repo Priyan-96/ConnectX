@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import "../styles/App.css";
@@ -10,10 +11,15 @@ import Rightbar from "../components/Rightbar";
 
 export default function Layout() {
 
+  const navigate = useNavigate();
+  const isCookie = JSON.parse(localStorage.getItem('users'));
+  console.log("Iscookie : ", isCookie)
+  if ( !isCookie ) {
+    navigate("/login")
+  }
+
   const { isDarkMode } = useDarkMode();
-
-
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
 
   return (
     // <QueryClientProvider client={queryClient}>

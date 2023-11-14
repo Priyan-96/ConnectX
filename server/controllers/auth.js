@@ -1,6 +1,15 @@
 const db = require("../connect.js");
-const bcrypt = require("bcrypt");
+const argon2 = require('argon2');
 const jwt = require("jsonwebtoken");
+
+const hashPassword = async (password) => {
+    try {
+      const hashedPassword = await argon2.hash(password);
+      return hashedPassword;
+    } catch (error) {
+      throw error;
+    }
+  };
 
 const signup = (req, res) => {
     try {
@@ -12,8 +21,7 @@ const signup = (req, res) => {
             }
             if (data.length) return res.status(490).json("User already exists!");
 
-            const saltRounds = 10;
-            const hashedPassword = await bcrypt.hash(password, saltRounds);
+            const hashedPassword = await hashPassword(password);
 
             const query = "INSERT INTO users (`username`,`password`) VALUES (?,?)";
             db.query(query, [username, hashedPassword], (err, data) => {
@@ -36,7 +44,7 @@ const login = (req, res) => {
             if (err) return res.status(500).json(err);
             if (!data.length) return res.status(490).json("Invalid Credentials!");
             const userPassword = data[0].password;
-            const isValidPassword = await bcrypt.compare(loggedPassword, userPassword);
+            const isValidPassword = await argon2.verify(userPassword, loggedPassword);
             if (!isValidPassword) {
                 return res.status(490).json("Invalid Password!");
             }
@@ -59,7 +67,7 @@ const login = (req, res) => {
     }
 }
 
-const logout = (req, res) => {
+const logout = (req, res) => { 
     res.clearCookie("accessToken", {
         secure: true,
         sameSite: "none"

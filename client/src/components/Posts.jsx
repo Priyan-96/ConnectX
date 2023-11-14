@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import Post from "../components/Post";
 import { useQuery } from 'react-query';
 import { makeRequest } from '../axios.js';
@@ -10,8 +11,6 @@ export default function Posts({ userId }) {
       return res.data;
     });
   })
-
-  console.log("Posts Data : ",data);
 
   return (
     <div className='w-full h-full flex flex-col'>

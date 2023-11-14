@@ -57,7 +57,7 @@ export default function Navbar() {
     const res = makeRequest.post("/auths/logout").then((res) => {
       return res.data;
     })
-
+    localStorage.removeItem('users');
     navigate("/login");
   }
 
