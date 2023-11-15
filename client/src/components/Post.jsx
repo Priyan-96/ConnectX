@@ -81,7 +81,7 @@ export default function Post({ post }) {
     }
 
     return (
-        <div className={`flex flex-col mb-[20px] p-[20px] ${isDarkMode ? 'dark' : 'bg-white'} rounded-md`}>
+        <div className={`flex flex-col mb-[20px] p-[12px] sm:p-[20px] ${isDarkMode ? 'dark' : 'bg-white'} rounded-md`}>
             <div className='flex relative mb-[10px] items-center justify-between'>
                 <div className='flex items-center'>
                     <Link to={`/profile/${post.puserid}`}>
@@ -102,17 +102,17 @@ export default function Post({ post }) {
                 <img className='w-full max-h-[500px] object-cover' src={"/uploads/" + post.pimg} alt='' />
             </div>
             <div className='flex items-center p-1'>
-                <div>
+                <div className='flex items-center'>
                     {error ? "Something went wrong!" : isLoading ? "Loading Likes!" : (liked ? <FavoriteIcon onClick={handleLike} style={{ color: "red" }} /> : <FavoriteBorderIcon onClick={handleLike} />)}
-                    <span className='ml-[8px]'>{dataLength} Likes</span>
+                    <span className='ml-[4px] sm:ml-[6px] md:ml-[5px] text-[12px] lg:ml-[8px] md:text-[15px]'>{dataLength} Likes</span>
                 </div>
-                <div className='mx-[30px]'>
+                <div className='flex items-center mx-[25px] sm:mx-[27px] md:mx-[28px] lg:mx-[30px]'>
                     <CommentIcon />
-                    <span onClick={() => setComments(!comments)} className='ml-[8px] cursor-pointer'>Comments</span>
+                    <span onClick={() => setComments(!comments)} className='ml-[4px] sm:ml-[6px] md:ml-[5px] lg:ml-[8px] text-[12px] md:text-[15px] cursor-pointer'>Comments</span>
                 </div>
-                <div>
-                    <ShareIcon />
-                    <span className='ml-[8px] cursor-pointer'>Share</span>
+                <div className='flex items-center'>
+                    <ShareIcon style={{ fontSize: '20px' }}/>
+                    <span className='ml-[4px] sm:ml-[6px] text-[12px] md:ml-[5px] lg:ml-[8px] cursor-pointer md:text-[15px]'>Share</span>
                 </div>
             </div>
             {comments ? <Comments postId={post.pid} /> : <div className='opacity-0' />}

@@ -44,7 +44,7 @@ export default function Suggestion({ user }) {
 
     return (
         <div className='flex items-center m-[10px]'>
-            <div className='w-[70%] flex items-center'>
+            <div className='w-[80%] lg:w-[70%] flex items-center'>
                 <Link to={`/profile/${user.uid}`}>
                     <img className='w-[40px] border-black border-[1px] h-[40px] rounded-[50%]' src={(user) ? (user.profilepic) : null} alt='' />
                 </Link>
@@ -52,7 +52,7 @@ export default function Suggestion({ user }) {
                     <span className='w-auto ml-[15px] text-md'>{(user) ? (user.username) : null}</span>
                 </Link>
             </div>
-            <button onClick={handleFollow} className='text-white px-[15px] py-[4px] bg-blue-dark'>{relationshipStatus ? "Following" : "Follow"}</button>
+            <button onClick={handleFollow} className='text-white ml-[10px] px-[15px] py-[4px] bg-blue-dark'>{relationshipStatus ? "Following" : "Follow"}</button>
         </div>
     )
 }

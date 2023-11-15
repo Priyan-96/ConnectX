@@ -1,12 +1,11 @@
 import React from 'react';
-import Stories from './Stories';
 import SharePost from './Share';
 import Posts from './Posts';
 
 export default function Home() {
 
   return (
-    <div className='w-[63%] h-full'>
+    <div className='flex flex-col md:w-[74%] lg:w-[75%] h-auto'>
       {/* <Stories /> */}
       <SharePost />
       <Posts />

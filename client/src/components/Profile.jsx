@@ -9,7 +9,7 @@ import UpdateProfie from './UpdateProfie';
 import userProfile from "../assets/user_profile.jpg";
 
 export default function Profile() {
-  const [openUpdate,setOpenUpdate] = useState(false);
+  const [openUpdate, setOpenUpdate] = useState(false);
   const { isDarkMode } = useDarkMode();
   const { currentUser } = useAuth();
 
@@ -53,21 +53,22 @@ export default function Profile() {
   }
 
   return (
-    <div className='w-[63%] relative z-0'>
-      {isLoading ? "Loading!" : error ? "Something went wrong!" : <div className={`flex p-[15px] mb-[10px] ${isDarkMode ? 'dark' : 'bg-white'} rounded-md shadow-lg`}>
-        <img className='w-[100px] h-[100px] flex-shrink-0 rounded-[50%] object-cover block' src={(data.profilepic) ? (data.profilepic) : (userProfile)} alt='' />
-        <div className='flex flex-grow items-center ml-[20px] justify-between'>
-          <div className='flex flex-col'>
-            <span className='text-lg font-bold'>{data.username}</span>
-            <span>{data.userbio}</span>
+    <div className='w-full md:w-[74%] lg:w-[75%] z-0'>
+      {openUpdate ? <div className=''><UpdateProfie setOpenUpdate={setOpenUpdate} user={data} /></div> : <div className=''>
+        {isLoading ? "Loading!" : error ? "Something went wrong!" : <div className={`flex p-[15px] mb-[10px] ${isDarkMode ? 'dark' : 'bg-white'} rounded-md shadow-lg`}>
+          <img className='w-[60px] md:w-[80px] flex-shrink-0 rounded-[50%] object-cover block md:ml-[10px] lg:ml-[20px]' src={(data.profilepic) ? (data.profilepic) : (userProfile)} alt='' />
+          <div className='flex flex-grow items-center ml-[13px] md:ml-[20px] justify-between'>
+            <div className='flex flex-col'>
+              <span className='md:text-lg font-bold'>{data.username}</span>
+              <span>{data.userbio}</span>
+            </div>
+            {rIsLoading ? "Loading!" : rError ? "Something went wrong!" : userId === currentUser.uid ? <button onClick={() => setOpenUpdate(true)} className='px-[15px] py-[7px] bg-blue-light text-white md:mr-[20px] lg:mr-[60px]'>Update</button> : <button className='px-[15px] py-[7px] bg-blue-light text-white mr-[60px]' onClick={handleFollow}>{relationshipStatus ? "Following" : "Follow"}</button>}
           </div>
-          {rIsLoading ? "Loading!" : rError ? "Something went wrong!" : userId === currentUser.uid ? <button onClick={()=>setOpenUpdate(true)} className='px-[15px] py-[7px] bg-blue-light text-white mr-[60px]'>Update</button> : <button className='px-[15px] py-[7px] bg-blue-light text-white mr-[60px]' onClick={handleFollow}>{relationshipStatus ? "Following" : "Follow"}</button>}
+        </div>}
+        <div className='mt-[10px]'>
+          <Posts userId={userId} />
         </div>
       </div>}
-      <div className='mt-[10px]'>
-        <Posts userId={userId}/>
-      </div>
-      {openUpdate && <UpdateProfie setOpenUpdate={setOpenUpdate} user={data}/>}
     </div>
   )
 }

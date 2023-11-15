@@ -58,9 +58,9 @@ export default function UpdateProfie({ setOpenUpdate, user }) {
   }
 
   return (
-    <div className='absolute top-0 left-0 w-[785px] h-[600px] bg-white z-10 py-[30px] px-[40px]'>
+    <div className='bg-white z-10 py-[30px] px-[40px]'>
       <div className='flex w-full items-center justify-between mb-[40px]'>
-        <span className='text-3xl text-gray-light font-bold'>Update Your Profile</span>
+        <span className='text-[22px] sm:text-3xl text-gray-light font-bold'>Update Your Profile</span>
         <button className='w-[30px] h-[30px] px-[10px] text-white bg-red-light font-bold' onClick={() => setOpenUpdate(false)}>X</button>
       </div>
       <div className='flex flex-col my-[20px]'>

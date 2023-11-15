@@ -22,6 +22,7 @@ export default function Navbar() {
   const { isDarkMode, toggleMode } = useDarkMode();
   const { currentUser } = useAuth();
 
+  const [isMobileSearch, setIsMobileSearch] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [isMenu, setIsMenu] = useState(false);
 
@@ -32,6 +33,15 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const { isMobileView } = useMobileView();
+
+  const handleMobileSearch = () => {
+    setIsMobileSearch(!isMobileSearch);
+    setIsMenu(!isMenu);
+  }
+
+  const handleMobileClose = () => {
+    setIsMobileSearch(!isMobileSearch); 
+  }
 
   const handleSearch = () => {
     setIsSearch(!isSearch);
@@ -65,7 +75,7 @@ export default function Navbar() {
     <div className={`w-full h-[60px] border-b fixed top-0 border-gray-light flex justify-between z-[100] ${isDarkMode ? 'dark' : 'bg-white'}`}>
       {isMobileView ? (<div className='w-full flex items-center justify-between'>
         <div className='w-auto flex items-center'>
-          <span className='ml-[30px] text-lg font-bold'>ConnectX</span>
+          <span className='ml-[20px] text-lg font-bold'>ConnectX</span>
           {/* <div className='flex flex-col relative ml-[30px] w-[300px]'>
             <div className='w-full flex border border-gray-light p-1'>
               <SearchOutlinedIcon />
@@ -79,9 +89,20 @@ export default function Navbar() {
             </div>) : <></>) : <></>}
           </div> */}
         </div>
-        <div onClick={handleMenu} className='px-[20px]'>
+        {isMobileSearch ? (<div className='flex flex-col relative'>
+          <div className='w-[200px] mr-[30px] flex border border-gray-light p-1'>
+            <SearchOutlinedIcon />
+            <input onClick={handleSearch} name="searchQuery" value={searchQuery} onChange={handleUserSearch} className={`w-full ml-2 outline-none flex-grow ${isDarkMode ? 'dark' : ''}`} type='text' placeholder='Search' />
+            <CloseIcon onClick={handleMobileClose} />
+          </div>
+          {(isSearch && searchQuery.length) ? (sData ? (<div className='absolute top-[35px] dark w-full px-[10px] border-[1px] border-white'>
+            {sData.map(data => (
+              <SearchUser data={data} closeSearch={handleSearch} />
+            ))}
+          </div>) : <></>) : <></>}
+        </div>) : (<div onClick={handleMenu} className='px-[20px]'>
           <MenuIcon />
-        </div>
+        </div>)}
         {isMenu ? (<div className={`absolute w-auto h-auto right-[1px] top-[60px] flex flex-col border border-gray-light ${isDarkMode ? 'dark' : 'bg-white'}`}>
           <Link to="/">
             <div className='flex items-center p-[4px] pr-[30px] pl-[15px]'>
@@ -99,13 +120,13 @@ export default function Navbar() {
               <span className='p-[4px]'>Profile</span>
             </div>
           </Link>
-          <div onClick={toggleMode} className='flex items-center justify-center p-[4px] pr-[30px] pl-[15px]'>
+          <div onClick={toggleMode} className='flex cursor-pointer items-center justify-center p-[4px] pr-[30px] pl-[15px]'>
             <div className='mr-[5px]'>
               {(isDarkMode) ? (<LightModeIcon />) : (<DarkModeOutlinedIcon />)}
             </div>
             <span className='p-[4px]'>Theme</span>
           </div>
-          <div className='flex items-center justify-center p-[4px] pr-[30px] pl-[15px]'>
+          <div onClick={handleMobileSearch} className='flex items-center cursor-pointer justify-center p-[4px] pr-[30px] pl-[15px]'>
             <div className='mr-[5px]'>
               <SearchOutlinedIcon />
             </div>
