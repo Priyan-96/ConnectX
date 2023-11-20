@@ -56,7 +56,7 @@ export default function Share() {
         <div className={`w-full h-auto ${isDarkMode ? 'dark' : 'bg-white'} flex flex-col mb-[20px] p-[18px] sm:p-[20px] md:p-[15px] lg:p-[20px] rounded-md`}>
             <div className="flex items-center mb-[20px] h-auto">
                 <img className='w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[40px] md:h-[40px] lg:w-[50px] border-black border-[1px] lg:h-[50px] mr-[20px] rounded-[50%] object-cover' src={(data) ? (data.profilepic) : (currentUser.profilepic)} alt='' />
-                <input className={`w-5/6 text-[13px] md:p-[0px] lg:p-[15px] ${isDarkMode ? 'dark' : 'bg-white'} focus:outline-none h-[50px]`} type="text" name="desc" onChange={(e) => { setDesc(e.target.value) }} value={desc} placeholder="Share your thoughts in your mind ..." />
+                <input className={`w-5/6 text-[13px] md:text-[16px] md:p-[0px] lg:p-[15px] ${isDarkMode ? 'dark' : 'bg-white'} focus:outline-none h-[50px]`} type="text" name="desc" onChange={(e) => { setDesc(e.target.value) }} value={desc} placeholder="Share your thoughts in your mind ..." />
             </div>
             {file && <img className="mb-[10px] object-cover" src={URL.createObjectURL(file)} alt="" />}
             <div className="flex justify-between sm:mt-[10px] lg:mt-[15px] xl:my-[15px]">
